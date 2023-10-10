@@ -1,1 +1,1 @@
-# Automated-blood-flow-detection
+# Automated Blood Flow Detection
