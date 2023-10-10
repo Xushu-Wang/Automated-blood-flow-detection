@@ -1,0 +1,48 @@
+{
+    "data": {
+        "train_path": "/Users/andywang/Desktop/Dataset_BUSI_with_GT/train",
+        "test_path": "/Users/andywang/Desktop/Dataset_BUSI_with_GT/test",
+        "name": "BUSI"
+    },
+
+    "preprocessing":{
+        "BUSI":{
+            "size": 256
+        }
+    },
+
+    "augmentation": {
+        "BUSI": {
+            "shift": [0.01,0.01],
+            "rotate": 15.0,
+            "scale": [0.8,1.2],
+            "random_flip_prob": 0.5, 
+            "gaussian": [10.0, 50.0]
+        }
+    },
+
+    "training": {
+        "num_epochs": 30,
+        "save_epoch_freq": 10,
+        "batchsize": 16,
+        "patience": 5,
+        "update_freq": 4
+    },
+
+    "model": {
+        "type": "seg",
+        "model_type": "recurrent residual attention unet",
+        "input_nc": 3,
+        "output_nc": 1,
+        "lr_rate": 1e-4,
+        "lr_decay_iters": 10,
+        "l2_reg_weight": 1e-6,
+        "optim": "adam",
+        "lr_policy": "plateau",
+        "pretrained": false,
+        "pretrained_path": "",
+        "checkpoints_dir": "./checkpoints",
+        "experiment_name": "r2attunet",
+        "criterion": "binary_dice_loss"
+    }
+}
