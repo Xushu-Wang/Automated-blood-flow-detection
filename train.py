@@ -69,7 +69,7 @@ def train(arguments):
             model.forward('train')
             error = model.get_segmentation_stats(split = 'train')
             writer.add_scalar('Train/{}'.format(model_opts.criterion), error['Segmentation Loss'], epoch * len(train_dataloader) + batch_idx)
-                
+        
                 
         # testing iteration
         for batch_idx, (image, mask) in tqdm(enumerate(test_dataloader, 0), total = len(test_dataloader)):
