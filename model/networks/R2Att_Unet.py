@@ -16,7 +16,7 @@ class R2AttU_Net(nn.Module):
     
     
     def __init__(self, ch_img = 3, ch_out = 1, n_filter = 64, t=2):
-        super(R2AttU_Net, self).__init__()
+        super().__init__()
         
         self.RCNN1 = RCNNBlock(ch_in=ch_img, ch_out=n_filter, t=t)
         self.RCNN2 = RCNNBlock(ch_in=n_filter, ch_out=n_filter * 2, t=t)
@@ -45,6 +45,8 @@ class R2AttU_Net(nn.Module):
         self.upsampling = nn.Upsample(scale_factor=2)
         
         self.maxpooling = nn.MaxPool2d(kernel_size=2, stride=2)
+        
+        self.sigmoid = nn.Sigmoid()
         
     def forward(self, x):
         x1 = self.conv1(x)
@@ -83,5 +85,5 @@ class R2AttU_Net(nn.Module):
         
         d1 = self.out(d2)
         
-        return d1
+        return self.sigmoid(d1)
         

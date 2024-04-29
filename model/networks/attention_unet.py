@@ -87,7 +87,7 @@ class AttU_Net(nn.Module):
         
         d1 = self.out(d2)
         
-        return d1
+        return self.sigmoid(d1)
 
         
         

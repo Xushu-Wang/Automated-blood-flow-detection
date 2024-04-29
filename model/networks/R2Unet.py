@@ -15,7 +15,7 @@ class R2U_Net(nn.Module):
     
     
     def __init__(self, ch_img = 3, ch_out = 1, n_filter = 64, t=2):
-        super(R2U_Net, self).__init__()
+        super().__init__()
         
         self.RCNN1 = RCNNBlock(ch_in=ch_img, ch_out=n_filter, t=t)
         self.RCNN2 = RCNNBlock(ch_in=n_filter, ch_out=n_filter * 2, t=t)
@@ -40,6 +40,8 @@ class R2U_Net(nn.Module):
         self.maxpooling = nn.MaxPool2d(kernel_size=2, stride=2)
         
         self.out = nn.Conv2d(n_filter, ch_out, kernel_size=1, stride=1, padding=0)
+        
+        self.sigmoid = nn.Sigmoid()
         
     def forward(self, x):
         x1 = self.conv1(x)
@@ -74,5 +76,5 @@ class R2U_Net(nn.Module):
         
         d1 = self.out(d2)
         
-        return d1
+        return self.sigmoid(d1)
         

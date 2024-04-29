@@ -46,6 +46,7 @@ class U_Net(nn.Module):
         
         self.maxpooling = nn.MaxPool2d(kernel_size = 2, stride = 2)
         
+        self.sigmoid = nn.Sigmoid()
         
     def forward(self, x):
         x1 = self.conv1(x)
@@ -80,7 +81,7 @@ class U_Net(nn.Module):
         
         d1 = self.out(d2)
         
-        return d1
+        return self.sigmoid(d1)
 
         
 if __name__ == '__main__':
